@@ -1,4 +1,5 @@
 export const ItemTypes = {
   CARD: "CARD",
-  VAR: "VAR"
+  WIDGET: "WIDGET",
+  TEXT: "TEXT"
 };

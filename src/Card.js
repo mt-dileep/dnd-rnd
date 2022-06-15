@@ -25,7 +25,7 @@ export default ({ id, x, y }) => {
       }}
       minWidth={300}
       minHeight={100}
-      bounds="window"
+      bounds="#template_body"
     >
       <Card id={id} />
     </Rnd>

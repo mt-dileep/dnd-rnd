@@ -7,3 +7,10 @@ body,
   box-sizing: border-box;
   background-repeat: repeat;
 }
+
+.ql-toolbar {
+  background: #eaecec;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+  border-bottom: none;
+}

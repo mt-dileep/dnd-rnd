@@ -6,7 +6,7 @@ import { widget } from "./widget";
 
 const widgetEngine = getInstance();
 
-export const Var = ({ name }) => {
+export const WidgetRnd = ({ name }) => {
   useEffect(() => {
     widgetEngine.render(widget, document.getElementById("_widget_"), {
       useConfigParser: true
@@ -19,7 +19,6 @@ export const Var = ({ name }) => {
 export default ({ id, x, y, name }) => {
   return (
     <Rnd
-      style={{ background: "white" }}
       default={{
         x,
         y,
@@ -28,10 +27,10 @@ export default ({ id, x, y, name }) => {
       }}
       minWidth={100}
       minHeight={30}
-      bounds="window"
+      bounds="#template_body"
     >
       <div id={`_widget_`}>
-        <Var id={id} name={name} />
+        <WidgetRnd id={id} name={name} />
       </div>
     </Rnd>
   );

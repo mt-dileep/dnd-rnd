@@ -5,23 +5,26 @@ import { useDrop } from "react-dnd";
 
 import { ItemTypes } from "./ItemTypes";
 import Card from "./Card";
-import Var from "./VariableRnd";
+import Editor from "./EditorRnD";
+import Widget from "./WidgetRnd";
+import Toolbar from "./Toolbar";
 
 const ITEM_TYPE = {
-  [ItemTypes.VAR]: Var,
-  [ItemTypes.CARD]: Card
+  [ItemTypes.WIDGET]: Widget,
+  [ItemTypes.CARD]: Card,
+  [ItemTypes.TEXT]: Editor
 };
-export default ({ pos }) => {
+export default ({ pos, bg }) => {
   const [cards, setCards] = useState([]);
   // const [pos, setPosition] = useState({ x: 0, y: 0 });
 
   const [{ isOver, isOverCurrent }, drop] = useDrop(
     () => ({
-      accept: [ItemTypes.CARD, ItemTypes.VAR],
+      accept: [ItemTypes.CARD, ItemTypes.WIDGET, ItemTypes.TEXT],
       drop(item, monitor) {
         // const didDrop = monitor.didDrop();
         // const pos = getPos();
-        console.log("pos", pos);
+        // console.log("pos", pos);
         const ncards = [...cards, { ...item, ...pos }];
         console.log("card", ncards);
         setCards(ncards);
@@ -45,16 +48,35 @@ export default ({ pos }) => {
 
   return (
     <div
-      ref={drop}
-      style={{ width: 700, height: 500, backgroundColor }}
-      id="template_body"
+      style={{
+        width: 700
+      }}
     >
-      {cards.map(({ id, x, y, type, name }, index) => {
-        const Component = ITEM_TYPE[type];
-        return (
-          <Component id={id} name={name} key={`${id}_${index}}`} x={x} y={y} />
-        );
-      })}
+      <Toolbar />
+      <div
+        ref={drop}
+        style={{
+          width: 700,
+          height: 500,
+          backgroundColor,
+          background: bg ? `url(${bg})` : "",
+          "background-size": bg ? "cover" : ""
+        }}
+        id="template_body"
+      >
+        {cards.map(({ id, x, y, type, name }, index) => {
+          const Component = ITEM_TYPE[type];
+          return (
+            <Component
+              id={id}
+              name={name}
+              key={`${id}_${index}}`}
+              x={x}
+              y={y}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
