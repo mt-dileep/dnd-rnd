@@ -1,7 +1,7 @@
 import Rnd from "react-rnd";
 import React from "react";
 
-import Editor from "./Editor";
+import Editor from "./QuillEditor";
 
 export default ({ id, x, y }) => {
   return (

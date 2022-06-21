@@ -10,6 +10,7 @@ import { ItemTypes } from "./ItemTypes.js";
 export default () => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [bg, setBg] = useState(null);
+  const [mode, setMode] = useState("Edit");
   return (
     <div
       id="dnd"
@@ -19,7 +20,7 @@ export default () => {
       }}
     >
       <DndProvider backend={HTML5Backend}>
-        <RndWrapper pos={pos} bg={bg} />
+        <RndWrapper pos={pos} bg={bg} mode={mode} />
         <Dragme id={1} type={ItemTypes.CARD} />
         <Dragme id={"id"} type={ItemTypes.TEXT} />
         <Dragme id={2} type={ItemTypes.WIDGET} name={"name"} />
@@ -39,6 +40,9 @@ export default () => {
           }
         >
           Set Background
+        </button>
+        <button onClick={() => setMode(mode == "Edit" ? "Read" : "Edit")}>
+          Toggle Mode
         </button>
       </DndProvider>
     </div>
