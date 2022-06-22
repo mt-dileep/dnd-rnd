@@ -77,6 +77,7 @@ export default function App({ height, mode }) {
               });
               editor.on("init", function () {
                 editor.ui.show();
+                editor.focus();
               });
             }
           }}
