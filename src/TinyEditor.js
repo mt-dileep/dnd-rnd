@@ -2,6 +2,20 @@ import React, { useRef } from "react";
 
 import { Editor } from "@tinymce/tinymce-react";
 // import "tinymce-variable";
+const VariableMenu = [
+  { text: "Name", value: "{{name}}" },
+  { text: "Award Date", value: "{{award_date}}" },
+  { text: "Expired On", value: "{{expired_On}}" }
+];
+const VariableMapper = {
+  name: "Name",
+  award_date: "Award Date",
+  expired_On: "Expired On"
+};
+const Var_Desc = {
+  name: "Learner's Name",
+  award_date: "The Date on which certificate will be awarded"
+};
 
 export default function App({ height, mode }) {
   const editorRef = useRef(null);
@@ -40,21 +54,16 @@ export default function App({ height, mode }) {
               "http://localhost:8000/variables/tinymce5-content.css",
               "https://fonts.googleapis.com/css?family=Open+Sans:400,600"
             ],
-            font_formats:
-              "Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Book Antiqua=book antiqua,palatino; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Open Sans=Open Sans; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats",
-            variable_mapper: { name: "Name", "Award Date": "Award Date" },
-            variable_desc: { name: "Name", "Award Date": "Award Date" },
+            // font_formats:
+            //   "Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Book Antiqua=book antiqua,palatino; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Open Sans=Open Sans; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats",
+            variable_mapper: VariableMapper,
+            variable_desc: Var_Desc,
             setup: function (editor) {
-              console.log("editor : ", editor);
               editor.ui.registry.addMenuButton("variablesDD", {
                 text: "Add Variable",
                 tooltip: "Insert variables in Template",
                 fetch: function (callback) {
-                  var items = [
-                    { text: "Name", value: "{{name}}" },
-                    { text: "Award Date", value: "{{Award Date}}" },
-                    { text: "Expired On", value: "{{Expired On}}" }
-                  ].map(function (v) {
+                  const items = VariableMenu.map(function (v) {
                     return {
                       type: "menuitem",
                       text: v.text,
@@ -65,6 +74,9 @@ export default function App({ height, mode }) {
                   });
                   callback(items);
                 }
+              });
+              editor.on("init", function () {
+                editor.ui.show();
               });
             }
           }}

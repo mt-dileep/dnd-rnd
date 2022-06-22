@@ -46,6 +46,7 @@ export default ({ pos, bg, mode }) => {
   if (isOverCurrent || isOver) {
     backgroundColor = "grey";
   }
+  let background = bg ? `url(${bg}) 0% 0% / cover` : "";
 
   return (
     <div
@@ -60,8 +61,7 @@ export default ({ pos, bg, mode }) => {
           width: 700,
           height: 500,
           backgroundColor,
-          background: bg ? `url(${bg})` : "",
-          backgroundSize: bg ? "cover" : ""
+          background
         }}
         id="template_body"
       >

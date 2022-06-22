@@ -6,7 +6,11 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import { Dragme } from "./DragMe";
 import RndWrapper from "./WrapperRnd";
 import { ItemTypes } from "./ItemTypes.js";
-
+const BG = [
+  "https://i.pinimg.com/564x/f4/67/27/f467276a4c7c75ea0ad3d53b7ad02f25.jpg",
+  "https://i.pinimg.com/564x/e2/92/60/e292609cb6b3381066226fe232cf9c6f.jpg",
+  "https://i.pinimg.com/564x/00/95/03/009503673a05a6e66f584e0ae2296112.jpg"
+];
 export default () => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [bg, setBg] = useState(null);
@@ -32,13 +36,7 @@ export default () => {
         >
           Print body
         </button>
-        <button
-          onClick={() =>
-            setBg(
-              "https://i.pinimg.com/originals/87/f9/48/87f9484d0209a82a13ee0a8463741f50.jpg"
-            )
-          }
-        >
+        <button onClick={() => setBg(BG[Math.trunc(Math.random() * 3)])}>
           Set Background
         </button>
         <button onClick={() => setMode(mode === "Edit" ? "Read" : "Edit")}>
