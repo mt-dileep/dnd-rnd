@@ -55,18 +55,18 @@ tinymce.PluginManager.add("variables", function (editor) {
   // var stringVariableRegex = new RegExp(prefix + "(.*)?" + suffix, "g");
   var stringVariableRegex = new RegExp(prefix + regex + suffix, "g");
 
-  var extra_variable_ps = editor.getParam("extra_variable_ps");
+//   var extra_variable_ps = editor.getParam("extra_variable_ps");
   var otherVariableRegexArr = [];
-  extra_variable_ps.forEach(function (value) {
-    otherVariableRegexArr.push({
-      prefix: value.prefix,
-      suffix: value.suffix,
-      regex: new RegExp(
-        escapeValue(value.prefix) + value.regex + escapeValue(value.suffix),
-        "g"
-      )
-    });
-  });
+//   extra_variable_ps.forEach(function (value) {
+//     otherVariableRegexArr.push({
+//       prefix: value.prefix,
+//       suffix: value.suffix,
+//       regex: new RegExp(
+//         escapeValue(value.prefix) + value.regex + escapeValue(value.suffix),
+//         "g"
+//       )
+//     });
+//   });
 
   /**
    * check if a certain variable is valid

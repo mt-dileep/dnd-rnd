@@ -1,0 +1,50 @@
+body, td, pre { font-size:14px;}
+
+.code {
+    margin-left: 5px;
+    height: 14px;
+    width: 30px;
+    color: #FF8B35;
+    letter-spacing: 0;
+    line-height: 1.6em;
+    box-sizing: border-box;
+    height: 19px;
+    width: 36px;
+    border: 1px solid #E9E9E9;
+    border-radius: 4px;
+    background-color: #F5F6F7;
+    padding-left: 2.5px;
+    padding-right: 2.5px;
+}
+.variable {
+    height: 14px;
+    width: 145px;
+    letter-spacing: 0.5px;
+    line-height: 1.6em;
+
+    height: 17px;
+    width: 150px;
+    border-radius: 4px;
+    background-color: #E1E5FB;
+    padding-left: 2.5px;
+    padding-right: 2.5px;
+}
+.mce-item-table:not([border]),
+.mce-item-table:not([border]) caption,
+.mce-item-table:not([border]) td,
+.mce-item-table:not([border]) th,
+.mce-item-table[border="0"],
+.mce-item-table[border="0"] caption,
+.mce-item-table[border="0"] td,
+.mce-item-table[border="0"] th,
+table[style*="border-width: 0px"],
+table[style*="border-width: 0px"] caption,
+table[style*="border-width: 0px"] td,
+table[style*="border-width: 0px"] th {
+    border: none;
+    border-collapse:separate;   
+}
+
+p{
+    margin:0px;
+}
