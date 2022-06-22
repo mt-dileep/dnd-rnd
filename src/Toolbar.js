@@ -1,9 +1,10 @@
 import React from "react";
 const CustomButton = () => <span className="octicon octicon-star">star</span>;
 
-export default () => (
-  <div id="toolbar">
-    <select
+export default () => <div id="toolbar"></div>;
+
+/***
+ *  <select
       className="ql-header"
       defaultValue={""}
       onChange={(e) => e.persist()}
@@ -26,9 +27,4 @@ export default () => (
     <button className="ql-insertStar">
       <CustomButton />
     </button>
-  </div>
-);
-
-/***
- *
  */
