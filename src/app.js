@@ -15,7 +15,7 @@ export default () => {
     <div
       id="dnd"
       onDragOver={(e) => {
-        console.log("drag ", e.pageX, e.pageY);
+        // console.log("drag ", e.pageX, e.pageY);
         setPos({ x: e.pageX, y: e.pageY });
       }}
     >
@@ -41,7 +41,7 @@ export default () => {
         >
           Set Background
         </button>
-        <button onClick={() => setMode(mode == "Edit" ? "Read" : "Edit")}>
+        <button onClick={() => setMode(mode === "Edit" ? "Read" : "Edit")}>
           Toggle Mode
         </button>
       </DndProvider>
