@@ -6,7 +6,8 @@ const style = {
   border: "1px dashed gray",
   padding: "0.5rem 1rem",
   backgroundColor: "white",
-  cursor: "move"
+  cursor: "move",
+  margin: "0.2rem"
 };
 export const Dragme = ({ id, type, name }) => {
   const [collected, drag, dragPreview] = useDrag(() => ({
