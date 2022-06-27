@@ -51,8 +51,8 @@ export default ({ pos, bg, mode, template }) => {
             ...item,
             id: `${item.id}_${Date.now()}`,
             ...pos,
-            height: "80px",
-            width: "200px",
+            height: "27px",
+            width: "125px",
             tinyMceContent: ''
           },
         };

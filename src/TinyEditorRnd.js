@@ -32,6 +32,17 @@ export default ({
           width: refToElement.offsetWidth,
         });
       }}
+      enableUserSelectHack={false}
+      enableResizing={{
+        top: false,
+        right: true,
+        bottom: false,
+        left: true,
+        topRight: false,
+        bottomRight: false,
+        bottomLeft: false,
+        topLeft: false,
+      }}
       bounds="#template_body"
     >
       <Editor

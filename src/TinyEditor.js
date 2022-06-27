@@ -51,7 +51,6 @@ export default function TinyEditor({
           value={tinyMceContent}
           onEditorChange={onChange}
           init={{
-            height: 100,
             menubar: false,
             placeholder: "Add your text here.",
             inline: true,
