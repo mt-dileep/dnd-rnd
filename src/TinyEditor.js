@@ -39,6 +39,7 @@ export default function TinyEditor({
   const onChange = (value) => {
     updateConfig(id, { tinyMceContent: value });
   };
+
   return (
     <div>
       <div id={id}>
@@ -47,7 +48,7 @@ export default function TinyEditor({
           onInit={(evt, editor) => (
             (editorRef.current = editor), addRef(editor)
           )}
-          initialValue={tinyMceContent}
+          value={tinyMceContent}
           onEditorChange={onChange}
           init={{
             height: 100,
