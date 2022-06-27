@@ -6,8 +6,8 @@ import { Dragme } from "./DragMe";
 import RndWrapper from "./WrapperRnd";
 import { ItemTypes } from "./ItemTypes.js";
 import Actions from "./Actions.js";
-import "./plugins/tooltip.css";
-import "./plugins/tinymce.css";
+import Toolbar from "./Toolbar";
+
 
 export default () => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
@@ -17,7 +17,7 @@ export default () => {
   return (
     <div
       id="dnd"
-      style={{ width: 950, height: 700, background: "#fcfcfc" }}
+      style={{ width: 950, height: 700 }}
       onDragOver={(e) => {
         // console.log("drag ", e.pageX, e.pageY);
         setPos({ x: e.pageX, y: e.pageY });
@@ -28,6 +28,7 @@ export default () => {
         rel="stylesheet"
         type="text/css"
       />
+      <Toolbar />
       <DndProvider backend={HTML5Backend}>
         <RndWrapper pos={pos} bg={bg} mode={mode} template={template} />
         <Dragme id={"TM"} type={ItemTypes.TEXT} />

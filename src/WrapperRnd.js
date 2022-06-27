@@ -8,7 +8,6 @@ import Card from "./Card";
 // import Editor from "./QuillEditorRnD";
 import Editor from "./TinyEditorRnd";
 import Widget from "./WidgetRnd";
-import Toolbar from "./Toolbar";
 // import { templateHTML } from "../src/data/Existing";
 
 const ITEM_TYPE = {
@@ -53,7 +52,7 @@ export default ({ pos, bg, mode, template }) => {
             ...pos,
             height: "27px",
             width: "125px",
-            tinyMceContent: ''
+            tinyMceContent: "",
           },
         };
 
@@ -97,9 +96,9 @@ export default ({ pos, bg, mode, template }) => {
     <div
       style={{
         width: 950,
+        background: "rgb(234 233 233)",
       }}
     >
-      <Toolbar />
       <div
         ref={drop}
         style={{

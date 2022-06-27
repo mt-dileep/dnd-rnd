@@ -55,7 +55,7 @@ export default function TinyEditor({
             placeholder: "Add your text here.",
             inline: true,
             external_plugins: {
-              variables: "http://localhost:8000/variables/plugin.min.js",
+              variables: "/plugins/variables.js",
             },
             // plugins: "save",
             fixed_toolbar_container: "#toolbar",
@@ -65,8 +65,8 @@ export default function TinyEditor({
             content_style:
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             content_css: [
-              "http://localhost:8000/variables/tooltip.css",
-              "http://localhost:8000/variables/tinymce5-content.css",
+              "/plugins/tinymce.css",
+              "/plugins/tooltip.css",
               "https://fonts.googleapis.com/css?family=Open+Sans:400,600",
             ],
             // font_family_formats:
