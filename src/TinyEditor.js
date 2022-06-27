@@ -5,20 +5,26 @@ import { Editor } from "@tinymce/tinymce-react";
 const VariableMenu = [
   { text: "Name", value: "{{name}}" },
   { text: "Award Date", value: "{{award_date}}" },
-  { text: "Expired On", value: "{{expired_On}}" }
+  { text: "Expired On", value: "{{expired_On}}" },
 ];
 const VariableMapper = {
   name: "Name",
   award_date: "Award Date",
-  expired_On: "Expired On"
+  expired_On: "Expired On",
 };
 const VariableDesc = {
   name: "Learner's Name",
   award_date: "The Date on which certificate will be awarded",
-  expired_On: "Certificate expiration date"
+  expired_On: "Certificate expiration date",
 };
 
-export default function TinyEditor({ id, mode, addRef }) {
+export default function TinyEditor({
+  id,
+  mode,
+  addRef,
+  tinyMceContent,
+  updateConfig,
+}) {
   const editorRef = useRef(null);
   // const cb = () => {
   //   editorRef.current._eventDispatcher.fire("changeHTMLToString");
@@ -29,6 +35,10 @@ export default function TinyEditor({ id, mode, addRef }) {
   //   console.log("body ---  ", editorRef.current.getBody());
   //   // console.log("dom : ", document.querySelector(`#${id}`));
   // };
+
+  const onChange = (value) => {
+    updateConfig(id, { tinyMceContent: value });
+  };
   return (
     <div>
       <div id={id}>
@@ -37,13 +47,15 @@ export default function TinyEditor({ id, mode, addRef }) {
           onInit={(evt, editor) => (
             (editorRef.current = editor), addRef(editor)
           )}
-          initialValue={"Add your text here"}
+          initialValue={tinyMceContent}
+          onEditorChange={onChange}
           init={{
             height: 100,
             menubar: false,
+            placeholder: "Add your text here.",
             inline: true,
             external_plugins: {
-              variables: "http://localhost:8000/variables/plugin.min.js"
+              variables: "http://localhost:8000/variables/plugin.min.js",
             },
             // plugins: "save",
             fixed_toolbar_container: "#toolbar",
@@ -55,7 +67,7 @@ export default function TinyEditor({ id, mode, addRef }) {
             content_css: [
               "http://localhost:8000/variables/tooltip.css",
               "http://localhost:8000/variables/tinymce5-content.css",
-              "https://fonts.googleapis.com/css?family=Open+Sans:400,600"
+              "https://fonts.googleapis.com/css?family=Open+Sans:400,600",
             ],
             // font_family_formats:
             //   "Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black",
@@ -73,11 +85,11 @@ export default function TinyEditor({ id, mode, addRef }) {
                       text: v.text,
                       onAction: function () {
                         editor.insertContent(v.value);
-                      }
+                      },
                     };
                   });
                   callback(items);
-                }
+                },
               });
               editor.on("init", function () {
                 editor.ui.show();
@@ -87,9 +99,9 @@ export default function TinyEditor({ id, mode, addRef }) {
                 predicate: (node) => !editor.selection.isCollapsed(),
                 items: "bold italic | blockquote",
                 position: "selection",
-                scope: "node"
+                scope: "node",
               });
-            }
+            },
           }}
         />
       </div>

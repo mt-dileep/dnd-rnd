@@ -13,6 +13,7 @@ export default () => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [bg, setBg] = useState(null);
   const [mode, setMode] = useState("Edit");
+  const [template, setTemplate] = useState({});
   return (
     <div
       id="dnd"
@@ -28,9 +29,9 @@ export default () => {
         type="text/css"
       />
       <DndProvider backend={HTML5Backend}>
-        <RndWrapper pos={pos} bg={bg} mode={mode} />
+        <RndWrapper pos={pos} bg={bg} mode={mode} template={template} />
         <Dragme id={"TM"} type={ItemTypes.TEXT} />
-        <Actions setBg={setBg} setMode={setMode} mode={mode} />
+        <Actions setBg={setBg} setMode={setMode} mode={mode} setTemplate={setTemplate} />
         {/* <Dragme id={1} type={ItemTypes.CARD} /> */}
         {/* <Dragme id={2} type={ItemTypes.WIDGET} name={"name"} /> */}
       </DndProvider>
