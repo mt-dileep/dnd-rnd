@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 import { Editor } from "@tinymce/tinymce-react";
-// import "tinymce-variable";
+
 const VariableMenu = [
   { text: "Name", value: "{{name}}" },
   { text: "Award Date", value: "{{award_date}}" },
@@ -18,26 +18,34 @@ const VariableDesc = {
   expired_On: "Certificate expiration date"
 };
 
-export default function TinyEditor({ height, mode }) {
+export default function TinyEditor({ id, mode, addRef }) {
   const editorRef = useRef(null);
-  const cb = () => {
-    editorRef.current._eventDispatcher.fire("changeHTMLToString");
-  };
+  // const cb = () => {
+  //   editorRef.current._eventDispatcher.fire("changeHTMLToString");
+  //   console.log(
+  //     "save position: ",
+  //     editorRef.current.selection.getBoundingClientRect()
+  //   );
+  //   console.log("body ---  ", editorRef.current.getBody());
+  //   // console.log("dom : ", document.querySelector(`#${id}`));
+  // };
   return (
     <div>
-      <div>
+      <div id={id}>
         <Editor
           apiKey="4eipi8mfr092w22jp2qz0jnl1ljmu8k29ku9e04g4x93xaqz"
-          onInit={(evt, editor) => (editorRef.current = editor)}
+          onInit={(evt, editor) => (
+            (editorRef.current = editor), addRef(editor)
+          )}
           initialValue={"Add your text here"}
           init={{
-            height: 200,
+            height: 100,
             menubar: false,
             inline: true,
             external_plugins: {
               variables: "http://localhost:8000/variables/plugin.min.js"
             },
-            //   plugins:["variables"],
+            // plugins: "save",
             fixed_toolbar_container: "#toolbar",
             toolbar:
               "undo redo | fontfamily fontsize |  bold italic backcolor | alignleft aligncenter " +
@@ -49,11 +57,12 @@ export default function TinyEditor({ height, mode }) {
               "http://localhost:8000/variables/tinymce5-content.css",
               "https://fonts.googleapis.com/css?family=Open+Sans:400,600"
             ],
-            // font_formats:
-            //   "Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Book Antiqua=book antiqua,palatino; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Open Sans=Open Sans; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats",
+            // font_family_formats:
+            //   "Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black",
             variable_mapper: VariableMapper,
             variable_desc: VariableDesc,
             setup: function (editor) {
+              console.log(editor);
               editor.ui.registry.addMenuButton("variablesDD", {
                 text: "Add Variable",
                 tooltip: "Insert variables in Template",
@@ -74,11 +83,17 @@ export default function TinyEditor({ height, mode }) {
                 editor.ui.show();
                 editor.focus();
               });
+              editor.ui.registry.addContextToolbar("textselection", {
+                predicate: (node) => !editor.selection.isCollapsed(),
+                items: "bold italic | blockquote",
+                position: "selection",
+                scope: "node"
+              });
             }
           }}
         />
       </div>
-      {mode !== "Read" && <button onClick={cb}>call me</button>}
+      {/* {mode !== "Read" && <button onClick={cb}>Convert</button>} */}
     </div>
   );
 }

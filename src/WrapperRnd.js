@@ -9,6 +9,7 @@ import Card from "./Card";
 import Editor from "./TinyEditorRnd";
 import Widget from "./WidgetRnd";
 import Toolbar from "./Toolbar";
+// import { templateHTML } from "../src/data/Existing";
 
 const ITEM_TYPE = {
   [ItemTypes.WIDGET]: Widget,
@@ -16,38 +17,55 @@ const ITEM_TYPE = {
   [ItemTypes.TEXT]: Editor
 };
 export default ({ pos, bg, mode }) => {
-  const [cards, setCards] = useState([]);
-  // const [pos, setPosition] = useState({ x: 0, y: 0 });
+  const [droppedElements, setElements] = useState([]);
+  const [allRef, setRefs] = useState([]);
 
   const [{ isOver, isOverCurrent }, drop] = useDrop(
     () => ({
       accept: [ItemTypes.CARD, ItemTypes.WIDGET, ItemTypes.TEXT],
       drop(item, monitor) {
         // const didDrop = monitor.didDrop();
-        // const pos = getPos();
-        // console.log("pos", pos);
-        const ncards = [...cards, { ...item, ...pos }];
-        console.log("card", ncards);
-        setCards(ncards);
-        // setPosition(getPos());
+        const newDroppedEl = [
+          ...droppedElements,
+          { ...item, id: `${item.id}_${Date.now()}`, ...pos }
+        ];
+        console.log("all Elements in drop zone: ", newDroppedEl);
+        setElements(newDroppedEl);
       },
       collect: (monitor) => ({
         isOver: monitor.isOver(),
         isOverCurrent: monitor.isOver({ shallow: true })
       }),
-      hover: (item, monitor) => {
-        // setPosition(getPos());
-        // console.log("hover", mousex, mousey);
-      }
+      hover: (item, monitor) => {}
     }),
-    [cards, setCards, pos]
+    [droppedElements, setElements, pos]
   );
-  let backgroundColor = "rgba(0, 0, 0, .05)";
+  let borderStyle = "";
+  let borderColor = "";
   if (isOverCurrent || isOver) {
-    backgroundColor = "grey";
+    borderStyle = "groove";
+    borderColor = "cadetblue";
   }
   let background = bg ? `url(${bg}) 0% 0% / cover` : "";
 
+  const addRef = (ref) => {
+    setRefs([...allRef, ref]);
+  };
+  const convertAll = () => {
+    allRef.forEach((editorRef) => {
+      editorRef._eventDispatcher.fire("changeHTMLToString");
+      console.log(
+        "save position: ",
+        editorRef.selection.getBoundingClientRect()
+      );
+      console.log("body ---  ", editorRef.getBody());
+      console.log("body ---  ", editorRef.selection.getContent());
+      // console.log("dom : ", document.querySelector(`#${id}`));
+    });
+  };
+  // if(data){
+  //   return 
+  // }
   return (
     <div
       style={{
@@ -60,12 +78,13 @@ export default ({ pos, bg, mode }) => {
         style={{
           width: 950,
           height: 700,
-          backgroundColor,
-          background
+          background,
+          borderColor,
+          borderStyle
         }}
         id="template_body"
       >
-        {cards.map(({ id, x, y, type, name }, index) => {
+        {droppedElements.map(({ id, x, y, type, name }, index) => {
           const Component = ITEM_TYPE[type];
           return (
             <Component
@@ -75,10 +94,12 @@ export default ({ pos, bg, mode }) => {
               x={x}
               y={y}
               mode={mode}
+              addRef={addRef}
             />
           );
         })}
       </div>
+      <button onClick={convertAll}>convertAll</button>
     </div>
   );
 };
