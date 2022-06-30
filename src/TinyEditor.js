@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
-
 import { Editor } from "@tinymce/tinymce-react";
+
+import "./plugins/tinymce.css";
+import "./plugins/tooltip.css";
 
 const VariableMenu = [
   { text: "Name", value: "{{name}}" },
@@ -54,24 +56,28 @@ export default function TinyEditor({
         external_plugins: {
           variables: "/plugins/variables.js",
         },
-        // plugins: "save",
         fixed_toolbar_container: "#toolbar",
         toolbar:
           "undo redo | fontfamily fontsize |  bold italic backcolor | alignleft aligncenter " +
           "alignright alignjustify | bullist numlist outdent indent | variablesDD",
+        font_family_formats:
+          "Arial=arial,helvetica,sans-serif; Arial Black=arial black,avant garde; Book Antiqua=book antiqua,palatino; Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; Oswald=oswald; Symbol=symbol; Tahoma=tahoma,arial,helvetica,sans-serif; Terminal=terminal,monaco; Times New Roman=times new roman,times; Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; Webdings=webdings; Wingdings=wingdings,zapf dingbats",
         content_style:
-          "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+          "@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');",
+        // content_style:
+        //   "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         content_css: [
-          "/plugins/tinymce.css",
-          "/plugins/tooltip.css",
           "https://fonts.googleapis.com/css?family=Open+Sans:400,600",
         ],
         // font_family_formats:
         //   "Andale Mono=andale mono,times; Arial=arial,helvetica,sans-serif; Arial Black=arial black",
         variable_mapper: VariableMapper,
         variable_desc: VariableDesc,
+        init_instance_callback: (editor) => {
+          console.log("Inside Init instance", Object.assign({}, editor));
+        },
         setup: function (editor) {
-          console.log(editor);
+          console.log("Inside setup instance", Object.assign({}, editor));
           editor.ui.registry.addMenuButton("variablesDD", {
             text: "Add Variable",
             tooltip: "Insert variables in Template",

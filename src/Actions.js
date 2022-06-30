@@ -15,42 +15,15 @@ const BG = [
 ];
 
 const templateConfig = {
-  TM_1656320679419: {
-    id: "TM_1656320679419",
+  TM_1656406643588: {
+    id: "TM_1656406643588",
     type: "Text",
-    x: 532,
-    y: 57,
-    height: 67,
-    width: 417,
-    tinyMceContent: "<p>arhsiM uhsnamiH si eman ym ,yeH</p>",
-  },
-  TM_1656320712942: {
-    id: "TM_1656320712942",
-    type: "Text",
-    x: 536,
-    y: 339,
-    height: "80px",
-    width: "200px",
-    tinyMceContent: "<p>e;kcitdnim t akrw I</p>",
-  },
-  TM_1656320731959: {
-    id: "TM_1656320731959",
-    type: "Text",
-    x: 18,
-    y: 312,
-    height: "80px",
-    width: "200px",
-    tinyMceContent: "<p>em daer ro oem ees tnac uoy</p>",
-  },
-  TM_1656320805170: {
-    id: "TM_1656320805170",
-    type: "Text",
-    x: 150,
-    y: 105,
-    height: 10,
-    width: 780,
+    x: 263,
+    y: 394,
+    height: "27px",
+    width: "125px",
     tinyMceContent:
-      "<p><span style=\"font-family: 'arial black', sans-serif;\"><span style=\"font-family: 'courier new', courier, monospace;\"><strong>fdsfdscc</strong>fdsfdsfsdfds</span>dffdfdfdsddfsdfdsfsdfdshshagsdhshshhjhdsgha</span>dsdsasdssdsadsadadsadadsads&nbsp; sddssssdasdsadsadsa</p>",
+      '<p>sadasdadsd <span class="mceNonEditable variable" data-tooltip="Certificate expiration date" data-tooltip-position="top" data-original-variable="{{expired_On}}">Expired On</span></p>',
   },
 };
 

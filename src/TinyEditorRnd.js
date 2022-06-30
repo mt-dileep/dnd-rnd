@@ -43,6 +43,7 @@ export default ({
         bottomLeft: false,
         topLeft: false,
       }}
+      resizeHandleClasses={{ left: "resize-handle", right: "resize-handle" }}
       bounds="#template_body"
     >
       <Editor

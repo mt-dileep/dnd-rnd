@@ -50,7 +50,7 @@ export default ({ pos, bg, mode, template }) => {
             ...item,
             id: `${item.id}_${Date.now()}`,
             ...pos,
-            height: "27px",
+            height: "auto",
             width: "125px",
             tinyMceContent: "",
           },
@@ -79,19 +79,17 @@ export default ({ pos, bg, mode, template }) => {
   };
   const convertAll = () => {
     allRef.forEach((editorRef) => {
+      console.log("Before converting variables");
       editorRef._eventDispatcher.fire("changeHTMLToString");
-      console.log(
-        "save position: ",
-        editorRef.selection.getBoundingClientRect()
-      );
-      console.log("body ---  ", editorRef.getBody());
-      console.log("body ---  ", editorRef.selection.getContent());
-      // console.log("dom : ", document.querySelector(`#${id}`));
+      console.log("After converting variables");
+
+      console.log("body ---  ", editorRef.getContent());
+      console.log("Before setting html");
+      editorRef._eventDispatcher.fire("changeToHTML");
+      console.log("After setting html");
     });
   };
-  // if(data){
-  //   return
-  // }
+
   return (
     <div
       style={{
