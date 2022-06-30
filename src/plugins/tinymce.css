@@ -12,6 +12,10 @@ pre {
   padding: 2px;
 }
 
+.mce-content-body:focus-visible {
+  outline: none;
+}
+
 .variable {
   height: 14px;
   width: 145px;
