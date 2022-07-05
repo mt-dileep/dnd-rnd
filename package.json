@@ -6,8 +6,6 @@
   "main": "src/index.js",
   "dependencies": {
     "@babel/runtime-corejs2": "^7.18.3",
-    "@mindtickle/description": "^0.1.0-beta.83",
-    "@mindtickle/mt-widget-engine": "^1.1.1",
     "@tinymce/tinymce-react": "^4.1.0",
     "antd": "^4.21.1",
     "html-to-react": "^1.4.8",

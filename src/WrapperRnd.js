@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import React from "react";
 
 import { useDrop } from "react-dnd";
@@ -7,11 +7,10 @@ import { ItemTypes } from "./ItemTypes";
 import Card from "./Card";
 // import Editor from "./QuillEditorRnD";
 import Editor from "./TinyEditorRnd";
-import Widget from "./WidgetRnd";
 // import { templateHTML } from "../src/data/Existing";
 
 const ITEM_TYPE = {
-  [ItemTypes.WIDGET]: Widget,
+  // [ItemTypes.WIDGET]: Widget,
   [ItemTypes.CARD]: Card,
   [ItemTypes.TEXT]: Editor,
 };
