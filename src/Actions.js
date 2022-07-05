@@ -15,15 +15,25 @@ const BG = [
 ];
 
 const templateConfig = {
-  TM_1656406643588: {
-    id: "TM_1656406643588",
+  TM_1656590425998: {
+    id: "TM_1656590425998",
+    code: "TM",
     type: "Text",
-    x: 263,
-    y: 394,
-    height: "27px",
-    width: "125px",
-    tinyMceContent:
-      '<p>sadasdadsd <span class="mceNonEditable variable" data-tooltip="Certificate expiration date" data-tooltip-position="top" data-original-variable="{{expired_On}}">Expired On</span></p>',
+    x: 217,
+    y: 384,
+    height: 29,
+    width: 338,
+    tinyMceContent: "",
+  },
+  TM_1656590480181: {
+    id: "TM_1656590480181",
+    code: "TM",
+    type: "Text",
+    x: 352,
+    y: 199,
+    height: 29,
+    width: 164,
+    tinyMceContent: "",
   },
 };
 

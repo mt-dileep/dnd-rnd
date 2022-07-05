@@ -7,18 +7,18 @@ const style = {
   padding: "0.5rem 1rem",
   backgroundColor: "white",
   cursor: "move",
-  margin: "0.2rem"
+  margin: "0.2rem",
 };
-export const Dragme = ({ id, type, name }) => {
+export const Dragme = ({ code, type, name }) => {
   const [collected, drag, dragPreview] = useDrag(() => ({
     type,
-    item: { id, type, name },
-    end(item, monitor) {
-      console.log("end called", item.id);
-    },
-    options: { dropEffect: "copy" }
+    item: { code, type, name },
+    // end(item, monitor) {
+    //   console.log("end called", item.code);
+    // },
+    options: { dropEffect: "copy" },
   }));
-  console.log(collected.isDragging);
+
   return collected.isDragging ? (
     <div ref={dragPreview} />
   ) : (

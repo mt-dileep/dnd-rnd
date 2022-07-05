@@ -10,6 +10,8 @@ export default ({
   mode,
   addRef,
   updateConfig,
+  deleteInstance,
+  duplicateTemplate,
   height,
   width,
   tinyMceContent,
@@ -51,6 +53,8 @@ export default ({
         mode={mode}
         addRef={addRef}
         tinyMceContent={tinyMceContent}
+        deleteInstance={deleteInstance}
+        duplicateTemplate={duplicateTemplate}
         updateConfig={updateConfig}
       />
     </Rnd>

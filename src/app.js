@@ -7,32 +7,37 @@ import RndWrapper from "./WrapperRnd";
 import { ItemTypes } from "./ItemTypes.js";
 import Actions from "./Actions.js";
 import Toolbar from "./Toolbar";
-
+import useTemplate from "./useTemplate";
 
 export default () => {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [bg, setBg] = useState(null);
   const [mode, setMode] = useState("Edit");
-  const [template, setTemplate] = useState({});
+  const { template, setTemplate } = useTemplate();
   return (
     <div
       id="dnd"
       style={{ width: 950, height: 700 }}
       onDragOver={(e) => {
-        // console.log("drag ", e.pageX, e.pageY);
         setPos({ x: e.pageX, y: e.pageY });
       }}
     >
-      <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:400,600"
-        rel="stylesheet"
-        type="text/css"
-      />
       <Toolbar />
       <DndProvider backend={HTML5Backend}>
-        <RndWrapper pos={pos} bg={bg} mode={mode} template={template} />
-        <Dragme id={"TM"} type={ItemTypes.TEXT} />
-        <Actions setBg={setBg} setMode={setMode} mode={mode} setTemplate={setTemplate} />
+        <RndWrapper
+          pos={pos}
+          bg={bg}
+          mode={mode}
+          template={template}
+          setTemplate={setTemplate}
+        />
+        <Dragme code={"TM"} type={ItemTypes.TEXT} />
+        <Actions
+          setBg={setBg}
+          setMode={setMode}
+          mode={mode}
+          setTemplate={setTemplate}
+        />
         {/* <Dragme id={1} type={ItemTypes.CARD} /> */}
         {/* <Dragme id={2} type={ItemTypes.WIDGET} name={"name"} /> */}
       </DndProvider>

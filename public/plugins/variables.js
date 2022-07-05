@@ -10,8 +10,6 @@
 
 /*global tinymce:true */
 
-console.log("inside plugin")
-
 tinymce.PluginManager.add("variables", function (editor) {
   var VK = tinymce.util.VK;
 

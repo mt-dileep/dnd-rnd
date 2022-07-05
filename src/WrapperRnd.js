@@ -16,39 +16,62 @@ const ITEM_TYPE = {
   [ItemTypes.TEXT]: Editor,
 };
 
-export default ({ pos, bg, mode, template }) => {
-  const [droppedElements, setElements] = useState({});
+export default ({ pos, bg, mode, setTemplate, template }) => {
   const [allRef, setRefs] = useState([]);
 
-  useEffect(() => {
-    setElements(template);
-  }, [template]);
-
   const updateConfig = (id, newState) => {
-    setElements((prevState) => ({
-      ...prevState,
-      [id]: {
-        ...prevState[id],
-        ...newState,
-      },
-    }));
+    setTemplate((prevState) => {
+      return {
+        ...prevState,
+        [id]: {
+          ...prevState[id],
+          ...newState,
+        },
+      };
+    });
   };
 
-  useEffect(() => {
-    console.log("all Elements in drop zone: ", droppedElements);
-  }, [droppedElements]);
+  const deleteInstance = (id) => {
+    setTemplate((prevState) => {
+      delete prevState[id];
+      return { ...prevState };
+    });
+  };
+
+  const duplicateTemplate = (id) => {
+    setTemplate((prevState) => {
+      console.log(prevState);
+      const itemToBeDuplicated = prevState[id];
+      // console.log("itemToBeDuplicated", prevState);
+      const uniqueId = `${itemToBeDuplicated.code}_${Date.now()}`;
+      const newDroppedEl = {
+        ...prevState,
+        [uniqueId]: {
+          ...itemToBeDuplicated,
+          id: uniqueId,
+        },
+      };
+      return newDroppedEl;
+    });
+  };
+
+  // useEffect(() => {
+  //   console.log("all Elements in drop zone: ", template);
+  // }, [template]);
+
+  console.log("all Elements in drop zone: ", template);
 
   const [{ isOver, isOverCurrent }, drop] = useDrop(
     () => ({
       accept: [ItemTypes.CARD, ItemTypes.WIDGET, ItemTypes.TEXT],
       drop(item, monitor) {
-        console.log(pos);
         // const didDrop = monitor.didDrop();
+        const uniqueId = `${item.code}_${Date.now()}`;
         const newDroppedEl = {
-          ...droppedElements,
-          [`${item.id}_${Date.now()}`]: {
+          ...template,
+          [uniqueId]: {
+            id: `${item.code}_${Date.now()}`,
             ...item,
-            id: `${item.id}_${Date.now()}`,
             ...pos,
             height: "auto",
             width: "150px",
@@ -56,7 +79,7 @@ export default ({ pos, bg, mode, template }) => {
           },
         };
 
-        setElements(newDroppedEl);
+        setTemplate(newDroppedEl);
       },
       collect: (monitor) => ({
         isOver: monitor.isOver(),
@@ -64,7 +87,7 @@ export default ({ pos, bg, mode, template }) => {
       }),
       hover: (item, monitor) => {},
     }),
-    [droppedElements, setElements, pos]
+    [template, setTemplate, pos]
   );
   let borderStyle = "";
   let borderColor = "";
@@ -90,6 +113,8 @@ export default ({ pos, bg, mode, template }) => {
     });
   };
 
+  console.log("Rendering elements", Object.values(template));
+
   return (
     <div
       style={{
@@ -108,26 +133,32 @@ export default ({ pos, bg, mode, template }) => {
         }}
         id="template_body"
       >
-        {Object.values(droppedElements).map(
-          ({ id, x, y, type, name, height, width, tinyMceContent }, index) => {
-            const Component = ITEM_TYPE[type];
-            return (
-              <Component
-                id={id}
-                name={name}
-                key={`${id}_${index}}`}
-                x={x}
-                y={y}
-                mode={mode}
-                addRef={addRef}
-                height={height}
-                width={width}
-                updateConfig={updateConfig}
-                tinyMceContent={tinyMceContent}
-              />
-            );
-          }
-        )}
+        {Object.values(template).length > 0 &&
+          Object.values(template).map(
+            (
+              { id, x, y, type, name, height, width, tinyMceContent },
+              index
+            ) => {
+              const Component = ITEM_TYPE[type];
+              return (
+                <Component
+                  id={id}
+                  name={name}
+                  key={`${id}_${index}}`}
+                  x={x}
+                  y={y}
+                  mode={mode}
+                  addRef={addRef}
+                  height={height}
+                  width={width}
+                  updateConfig={updateConfig}
+                  tinyMceContent={tinyMceContent}
+                  deleteInstance={deleteInstance}
+                  duplicateTemplate={duplicateTemplate}
+                />
+              );
+            }
+          )}
       </div>
       <button onClick={convertAll}>convertAll</button>
     </div>
